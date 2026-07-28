@@ -1,5 +1,13 @@
 import pandas as pd
 
+products = [
+    "Rice",
+    "Tomato",
+    "Onion",
+    "Wheat",
+    "Sugar"
+]
+
 
 events = pd.read_csv(
     "data/market_events.csv"
