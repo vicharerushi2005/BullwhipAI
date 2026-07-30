@@ -1,0 +1,13 @@
+{
+    "current_inventory": 1460,
+    "predicted_demand": 504,
+    "inventory_gap": -956,
+    "recommended_inventory": 580,
+    "recommended_order_quantity": 0,
+    "safety_stock": 76,
+    "reorder_point": 93,
+    "days_remaining": 86.9,
+    "estimated_holding_cost": 17520.0,
+    "inventory_health_score": 0,
+    "inventory_status": "Critical"
+}

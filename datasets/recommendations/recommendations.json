@@ -1,0 +1,12 @@
+{
+    "prediction": "Medium",
+    "confidence": 78.5,
+    "recommendation_count": 1,
+    "recommendations": [
+        {
+            "priority": "Medium",
+            "action": "Reduce procurement until inventory returns to healthy levels.",
+            "reason": "Inventory is considerably higher than expected demand."
+        }
+    ]
+}

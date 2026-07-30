@@ -1,0 +1,42 @@
+{
+    "prediction": "Medium",
+    "confidence": 78.5,
+    "accuracy": 0.75,
+    "top_factors": [
+        {
+            "feature": "Rainfall",
+            "importance": 0.0605,
+            "title": "Heavy Rainfall",
+            "reason": "Heavy rainfall can delay harvesting, damage crops, slow transportation, and reduce market supply. These disruptions often increase supply uncertainty and amplify the Bullwhip Effect.",
+            "impact": "High"
+        },
+        {
+            "feature": "FuelPrice",
+            "importance": 0.0481,
+            "title": "FuelPrice",
+            "reason": "No explanation available.",
+            "impact": "Unknown"
+        },
+        {
+            "feature": "Demand",
+            "importance": 0.0452,
+            "title": "Demand Surge",
+            "reason": "Demand is significantly higher than normal. If inventory cannot satisfy customer demand, panic ordering and stock shortages may occur.",
+            "impact": "High"
+        },
+        {
+            "feature": "WeatherSeverity",
+            "importance": 0.0358,
+            "title": "Severe Weather",
+            "reason": "Extreme weather conditions increase operational uncertainty and frequently disrupt logistics, farming, and distribution.",
+            "impact": "Very High"
+        },
+        {
+            "feature": "FuelImpact",
+            "importance": 0.0312,
+            "title": "Fuel Cost Impact",
+            "reason": "Higher fuel prices increase transportation costs and may delay deliveries throughout the supply chain.",
+            "impact": "Medium"
+        }
+    ]
+}

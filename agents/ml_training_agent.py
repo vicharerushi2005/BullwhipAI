@@ -1,11 +1,9 @@
 """
 BullwhipAI
 Machine Learning Training Agent
-
-Purpose:
-Train a Random Forest model to predict Bullwhip Risk.
 """
 
+import json
 import joblib
 import pandas as pd
 from pathlib import Path
@@ -19,30 +17,23 @@ from sklearn.metrics import (
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
+from utils.preprocessing import prepare_features
+
 # --------------------------------------------------
 # PATHS
 # --------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-INPUT_FILE = (
-    BASE_DIR /
-    "datasets" /
-    "processed" /
-    "featured_supply_chain.csv"
-)
+INPUT_FILE = BASE_DIR / "datasets" / "processed" / "featured_supply_chain.csv"
 
-MODEL_DIR = (
-    BASE_DIR /
-    "datasets" /
-    "models"
-)
-
+MODEL_DIR = BASE_DIR / "datasets" / "models"
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
 MODEL_FILE = MODEL_DIR / "risk_prediction_model.pkl"
-
 ENCODER_FILE = MODEL_DIR / "label_encoder.pkl"
+FEATURE_FILE = MODEL_DIR / "feature_columns.pkl"
+METADATA_FILE = MODEL_DIR / "model_metadata.json"
 
 # --------------------------------------------------
 # LOAD DATA
@@ -55,30 +46,10 @@ df = pd.read_csv(INPUT_FILE)
 print(f"Rows Loaded : {len(df)}")
 
 # --------------------------------------------------
-# DROP UNUSED COLUMNS
+# PREPROCESS
 # --------------------------------------------------
 
-drop_columns = [
-    "Date",
-    "City",
-    "State",
-    "Country",
-    "Product"
-]
-
-df = df.drop(columns=drop_columns)
-
-# --------------------------------------------------
-# ENCODE MARKET SENTIMENT
-# --------------------------------------------------
-
-sentiment_map = {
-    "Positive": 0,
-    "Neutral": 1,
-    "Negative": 2
-}
-
-df["MarketSentiment"] = df["MarketSentiment"].map(sentiment_map)
+X, y = prepare_features(df, training=True)
 
 # --------------------------------------------------
 # ENCODE TARGET
@@ -86,21 +57,18 @@ df["MarketSentiment"] = df["MarketSentiment"].map(sentiment_map)
 
 label_encoder = LabelEncoder()
 
-df["RiskLevel"] = label_encoder.fit_transform(df["RiskLevel"])
+y = label_encoder.fit_transform(y)
 
-# Save encoder
 joblib.dump(label_encoder, ENCODER_FILE)
 
 # --------------------------------------------------
-# SPLIT FEATURES / TARGET
+# SAVE FEATURE LIST
 # --------------------------------------------------
 
-X = df.drop(columns=["RiskLevel"])
-
-y = df["RiskLevel"]
+joblib.dump(list(X.columns), FEATURE_FILE)
 
 # --------------------------------------------------
-# TRAIN TEST SPLIT
+# TRAIN / TEST SPLIT
 # --------------------------------------------------
 
 X_train, X_test, y_train, y_test = train_test_split(
@@ -115,7 +83,7 @@ print(f"\nTraining Samples : {len(X_train)}")
 print(f"Testing Samples  : {len(X_test)}")
 
 # --------------------------------------------------
-# MODEL
+# TRAIN MODEL
 # --------------------------------------------------
 
 print("\nTraining Random Forest...")
@@ -131,14 +99,10 @@ model.fit(X_train, y_train)
 print("Training Complete.")
 
 # --------------------------------------------------
-# PREDICTION
+# PREDICT
 # --------------------------------------------------
 
 predictions = model.predict(X_test)
-
-# --------------------------------------------------
-# EVALUATION
-# --------------------------------------------------
 
 accuracy = accuracy_score(y_test, predictions)
 
@@ -146,20 +110,18 @@ print("\n===============================")
 print("MODEL PERFORMANCE")
 print("===============================")
 
-print(f"\nAccuracy : {accuracy*100:.2f}%")
+print(f"\nAccuracy : {accuracy * 100:.2f}%")
 
 print("\nClassification Report\n")
 
-print(
-    classification_report(
-        y_test,
-        predictions,
-        target_names=label_encoder.classes_
-    )
-)
+print(classification_report(
+    y_test,
+    predictions,
+    target_names=label_encoder.classes_,
+    zero_division=0
+))
 
-print("Confusion Matrix\n")
-
+print("\nConfusion Matrix\n")
 print(confusion_matrix(y_test, predictions))
 
 # --------------------------------------------------
@@ -177,7 +139,6 @@ importance = importance.sort_values(
 )
 
 print("\nTop 10 Important Features\n")
-
 print(importance.head(10))
 
 # --------------------------------------------------
@@ -186,6 +147,33 @@ print(importance.head(10))
 
 joblib.dump(model, MODEL_FILE)
 
-print("\nModel Saved Successfully!")
+# --------------------------------------------------
+# SAVE METADATA
+# --------------------------------------------------
 
+metadata = {
+    "algorithm": "RandomForestClassifier",
+    "training_rows": len(df),
+    "features": len(X.columns),
+    "feature_names": list(X.columns),
+    "accuracy": round(float(accuracy), 4)
+}
+
+with open(METADATA_FILE, "w") as f:
+    json.dump(metadata, f, indent=4)
+
+print("\n===============================")
+print("MODEL ARTIFACTS SAVED")
+print("===============================")
+
+print("✓ Model")
 print(MODEL_FILE)
+
+print("\n✓ Label Encoder")
+print(ENCODER_FILE)
+
+print("\n✓ Feature Columns")
+print(FEATURE_FILE)
+
+print("\n✓ Metadata")
+print(METADATA_FILE)
