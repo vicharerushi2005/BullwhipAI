@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-08-01 16:22:08",
+  "prediction": {
+    "risk_label": "MEDIUM",
+    "risk_emoji": "\ud83d\udfe1 MEDIUM",
+    "confidence_pct": 80.5,
+    "confidence_breakdown": {
+      "LOW": 2.3,
+      "MEDIUM": 80.5,
+      "HIGH": 17.1
+    }
+  },
+  "top_drivers": [
+    {
+      "feature": "Demand_7d_Mean",
+      "description": "7-day average consumer demand",
+      "value": 981.68,
+      "local_impact": 16.89,
+      "assessment": "Value: 981.68"
+    },
+    {
+      "feature": "Temperature_C",
+      "description": "Temperature (\u00b0C)",
+      "value": 27.2,
+      "local_impact": 16.46,
+      "assessment": "\ud83d\udfe2 27.2\u00b0C \u2014 comfortable temperature range"
+    },
+    {
+      "feature": "Day_of_Year",
+      "description": "Day of the year (seasonality indicator)",
+      "value": 213,
+      "local_impact": 9.89,
+      "assessment": "Value: 213"
+    },
+    {
+      "feature": "Wholesaler_Order",
+      "description": "Wholesaler order quantity",
+      "value": 3240.0,
+      "local_impact": 9.68,
+      "assessment": "Value: 3240.0"
+    },
+    {
+      "feature": "Manufacturer_Order",
+      "description": "Manufacturer order quantity",
+      "value": 8100.0,
+      "local_impact": 9.1,
+      "assessment": "Value: 8100.0"
+    },
+    {
+      "feature": "Wind_Speed_kmh",
+      "description": "Wind speed (km/h)",
+      "value": 16.2,
+      "local_impact": 8.24,
+      "assessment": "Value: 16.2"
+    }
+  ],
+  "bullwhip_narrative": "Mild Bullwhip Effect detected. Ratio of 1.66 indicates some order inflation upstream. Early intervention can prevent escalation to HIGH risk. Monitor demand signals closely and avoid reactive over-ordering.",
+  "actions": {
+    "\ud83c\udfed Procurement Team": [
+      "Review supplier lead times \u2014 flag delays early",
+      "Maintain existing supplier contracts; avoid reactive spot buying",
+      "Commodity price trending at \u20b945/quintal \u2014 monitor weekly"
+    ],
+    "\ud83d\udce6 Inventory Team": [
+      "Maintain current safety stock levels",
+      "Run demand variance analysis for the week",
+      "Check for signs of accumulation due to retailer over-ordering"
+    ],
+    "\ud83c\udfd7 Production Team": [
+      "Continue current production plan",
+      "Build small buffer (5-10%) for festive/monsoon variability"
+    ],
+    "\ud83d\ude9a Logistics Team": [
+      "Standard monitoring \u2014 no major disruptions expected",
+      "Pre-plan monsoon contingencies"
+    ]
+  },
+  "model_info": {
+    "algorithm": "Random Forest (200 trees)",
+    "features_used": 26,
+    "xai_method": "Perturbation-based local sensitivity"
+  }
+}

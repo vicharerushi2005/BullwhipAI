@@ -1,145 +1,208 @@
-import ollama
+"""
+BullwhipAI - Market AI Agent v2.1
+===================================
+Generates LLM narrative using Ollama (local, free).
+Gracefully handles Ollama being offline — falls back to
+a rule-based report so the pipeline never crashes.
+"""
+
 import pandas as pd
+import os
+import json
+from datetime import datetime
 
+# -------------------------------------------------------
+# LOAD DATA
+# -------------------------------------------------------
 
-# ==============================
-# LOAD PROCESSED MARKET DATA
-# ==============================
+def load_csv_safe(path):
+    if os.path.exists(path):
+        try:
+            return pd.read_csv(path)
+        except Exception:
+            pass
+    return pd.DataFrame()
 
-events = pd.read_csv(
-    "data/market_events.csv"
-)
+events      = load_csv_safe("data/market_events.csv")
+risk        = load_csv_safe("data/risk_score.csv")
+xai_data    = {}
+xai_path    = "data/xai_explanation.json"
+if os.path.exists(xai_path):
+    try:
+        with open(xai_path) as f:
+            xai_data = json.load(f)
+    except Exception:
+        pass
 
+market_info = events.to_string() if not events.empty else "No market events data."
+risk_info   = risk.to_string()   if not risk.empty   else "No risk score data."
 
-risk = pd.read_csv(
-    "data/risk_score.csv"
-)
+# Include XAI summary in prompt if available
+xai_summary = ""
+if xai_data:
+    pred = xai_data.get("prediction", {})
+    drivers = xai_data.get("top_drivers", [])[:3]
+    xai_summary = f"""
+ML MODEL PREDICTION:
+Risk Level : {pred.get('risk_label','N/A')} (Confidence: {pred.get('confidence_pct','N/A')}%)
+Top Drivers: {', '.join([d['feature'] for d in drivers])}
+Analysis   : {xai_data.get('bullwhip_narrative','')}
+"""
 
-
-# Convert data into readable format
-
-market_information = events.to_string()
-
-risk_information = risk.to_string()
-
-
-# ==============================
-# CREATE AI PROMPT
-# ==============================
+# -------------------------------------------------------
+# PROMPT
+# -------------------------------------------------------
 
 prompt = f"""
-
-You are an AI Food Supply Chain Risk Analyst.
-
+You are an AI Food Supply Chain Risk Analyst for India.
 Your objective is to reduce the Bullwhip Effect.
-
 Analyze the following processed market information.
 
-
 MARKET EVENTS:
-
-{market_information}
-
-
+{market_info}
 
 RISK SCORE:
+{risk_info}
+{xai_summary}
 
-{risk_information}
-
-
-
-Prepare a practical business report.
-
-
-Follow this exact format:
-
+Prepare a practical business report in this exact format:
 
 ===== SUPPLY CHAIN ALERT =====
 
-
 1. Overall Risk Level:
-
-Mention:
-- Risk Level
-- Risk Score
-
+   - Risk Level and Score
 
 2. Main Supply Chain Threats:
-
-Identify:
-- Supply risks
-- Demand risks
-- Inventory risks
-
+   - Supply risks
+   - Demand risks
+   - Inventory risks
 
 3. Products Potentially Affected:
-
-Mention possible food products.
-
+   List specific food products.
 
 4. Bullwhip Effect Impact:
-
-Explain how this situation can create:
-- Overstocking
-- Shortages
-- Wrong production planning
-- Demand fluctuation
-
+   Explain how this causes overstocking, shortages, or wrong planning.
 
 5. Recommended Actions:
 
-
-Procurement Team:
-What should they do?
-
-
-Inventory Team:
-What should they do?
-
-
-Production Team:
-What should they do?
-
+   Procurement Team: (2-3 actions)
+   Inventory Team:   (2-3 actions)
+   Production Team:  (2-3 actions)
 
 6. Final Decision:
+   One clear action recommendation.
 
-Give a short action recommendation.
-
-
-Important:
-Do not only summarize information.
-Think like a supply chain manager making decisions.
-
+Think like a supply chain manager making real decisions.
 """
 
+# -------------------------------------------------------
+# RULE-BASED FALLBACK REPORT
+# -------------------------------------------------------
 
-# ==============================
-# SEND TO LOCAL AI MODEL
-# ==============================
+def generate_fallback_report():
+    """Generate a structured report without Ollama."""
+    risk_level   = "LOW"
+    risk_score   = 25.0
+    ml_risk      = "N/A"
+    ml_conf      = 0
+    narrative    = ""
 
-response = ollama.chat(
+    if not risk.empty:
+        risk_level = str(risk.get("Risk Level", pd.Series(["LOW"])).iloc[0])
+        risk_score = float(risk.get("Overall Score", pd.Series([25.0])).iloc[0])
 
-    model="qwen2.5:1.5b",
+    if xai_data:
+        pred     = xai_data.get("prediction", {})
+        ml_risk  = pred.get("risk_label", "N/A")
+        ml_conf  = pred.get("confidence_pct", 0)
+        narrative= xai_data.get("bullwhip_narrative", "")
 
-    messages=[
-        {
-            "role": "user",
-            "content": prompt
-        }
+    actions = xai_data.get("actions", {}) if xai_data else {}
+
+    report_lines = [
+        "",
+        "========== AI SUPPLY CHAIN REPORT (Rule-Based) ==========",
+        f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        "(Ollama offline — using rule-based report)",
+        "",
+        "===== SUPPLY CHAIN ALERT =====",
+        "",
+        f"1. Overall Risk Level:",
+        f"   Rule-Based : {risk_level} (Score: {risk_score})",
+        f"   ML Model   : {ml_risk} ({ml_conf}% confidence)",
+        "",
+        f"2. Bullwhip Effect Analysis:",
+        f"   {narrative}" if narrative else "   Monitoring supply chain signals.",
+        "",
+        "3. Products Potentially Affected:",
+        "   Rice, Wheat, Tomato, Onion, Sugar, Milk, Processed Food",
+        "",
+        "4. Recommended Actions:",
     ]
 
-)
+    if actions:
+        for team, acts in actions.items():
+            report_lines.append(f"\n   {team}:")
+            for a in acts:
+                report_lines.append(f"     • {a}")
+    else:
+        report_lines += [
+            "   Procurement : Monitor supplier lead times and commodity prices",
+            "   Inventory   : Maintain safety stock, avoid panic over-ordering",
+            "   Production  : Use 7-day rolling demand average for planning",
+        ]
+
+    report_lines += [
+        "",
+        "6. Final Decision:",
+        f"   {'Immediate intervention required — activate backup suppliers and increase safety stock.' if risk_level == 'HIGH' else 'Continue monitoring. Avoid reactive ordering to prevent bullwhip amplification.' if risk_level == 'MEDIUM' else 'Stable operations. Use this period to optimise inventory and renegotiate contracts.'}",
+        "",
+        "=" * 50,
+    ]
+
+    return "\n".join(report_lines)
 
 
-# ==============================
-# DISPLAY RESULT
-# ==============================
+# -------------------------------------------------------
+# TRY OLLAMA, FALL BACK GRACEFULLY
+# -------------------------------------------------------
 
-print("\n")
-print("========== AI SUPPLY CHAIN REPORT ==========")
-print("\n")
+report_text = None
 
+try:
+    import ollama
+    print("Connecting to Ollama...")
+    response = ollama.chat(
+        model="qwen2.5:1.5b",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    report_text = response["message"]["content"]
+    print("\n========== AI SUPPLY CHAIN REPORT (Ollama) ==========\n")
+    print(report_text)
 
-print(
-    response["message"]["content"]
-)
+except ImportError:
+    print("⚠️  ollama package not installed. Using rule-based report.")
+    report_text = generate_fallback_report()
+    print(report_text)
+
+except Exception as e:
+    err = str(e)
+    if "ConnectionError" in err or "connect" in err.lower() or "ollama" in err.lower():
+        print("⚠️  Ollama is not running. Using rule-based report.")
+        print("   To enable AI narratives: start Ollama and run: ollama pull qwen2.5:1.5b")
+    else:
+        print(f"⚠️  Ollama error: {err}. Using rule-based report.")
+    report_text = generate_fallback_report()
+    print(report_text)
+
+# -------------------------------------------------------
+# SAVE REPORT
+# -------------------------------------------------------
+
+if report_text:
+    os.makedirs("data", exist_ok=True)
+    report_path = "data/ai_report.txt"
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+        f.write(report_text)
+    print(f"\n✅ Report saved → {report_path}")

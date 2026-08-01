@@ -1,2 +1,5 @@
-Date,Product,Price,Unit,Source
-2026-07-29 20:26:04.399245,Rice,4200,per quintal,Commodity Market Data
+Product,Price,Unit,Date
+Tomato,40,Kg,2026-08-01 16:21:59.539237
+Wheat,35,Kg,2026-08-01 16:21:59.539237
+Rice,60,Kg,2026-08-01 16:21:59.539237
+Sugar,45,Kg,2026-08-01 16:21:59.539237

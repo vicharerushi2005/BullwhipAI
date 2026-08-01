@@ -1,0 +1,50 @@
+{
+  "trained_on": "2026-08-01 16:21",
+  "algorithm": "RandomForestClassifier",
+  "n_estimators": 200,
+  "train_records": 1797,
+  "test_records": 395,
+  "accuracy": 0.9848,
+  "f1_weighted": 0.9846,
+  "cv_mean": 0.9833,
+  "cv_std": 0.0061,
+  "features": [
+    "Consumer_Demand",
+    "Retailer_Order",
+    "Wholesaler_Order",
+    "Manufacturer_Order",
+    "Inventory_Level",
+    "Lead_Time_Days",
+    "Demand_Amplification",
+    "Bullwhip_Ratio",
+    "Supply_Disruption",
+    "Disruption_7d",
+    "LeadTime_7d_Max",
+    "Commodity_Price_INR",
+    "Price_7d_Mean",
+    "Price_Change_Pct",
+    "News_Sentiment",
+    "Temperature_C",
+    "Wind_Speed_kmh",
+    "Rainfall_mm",
+    "Month",
+    "Day_of_Year",
+    "Season",
+    "Is_Festival",
+    "Is_Monsoon",
+    "Demand_7d_Mean",
+    "Demand_7d_Std",
+    "Product_Code"
+  ],
+  "n_features": 26,
+  "classes": [
+    "LOW",
+    "MEDIUM",
+    "HIGH"
+  ],
+  "class_distribution": {
+    "MEDIUM": 1507,
+    "LOW": 392,
+    "HIGH": 293
+  }
+}

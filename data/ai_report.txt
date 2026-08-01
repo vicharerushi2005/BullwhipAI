@@ -1,0 +1,43 @@
+Generated: 2026-08-01 16:22:12
+
+
+========== AI SUPPLY CHAIN REPORT (Rule-Based) ==========
+Generated: 2026-08-01 16:22:12
+(Ollama offline — using rule-based report)
+
+===== SUPPLY CHAIN ALERT =====
+
+1. Overall Risk Level:
+   Rule-Based : LOW (Score: 25.0)
+   ML Model   : MEDIUM (80.5% confidence)
+
+2. Bullwhip Effect Analysis:
+   Mild Bullwhip Effect detected. Ratio of 1.66 indicates some order inflation upstream. Early intervention can prevent escalation to HIGH risk. Monitor demand signals closely and avoid reactive over-ordering.
+
+3. Products Potentially Affected:
+   Rice, Wheat, Tomato, Onion, Sugar, Milk, Processed Food
+
+4. Recommended Actions:
+
+   🏭 Procurement Team:
+     • Review supplier lead times — flag delays early
+     • Maintain existing supplier contracts; avoid reactive spot buying
+     • Commodity price trending at ₹45/quintal — monitor weekly
+
+   📦 Inventory Team:
+     • Maintain current safety stock levels
+     • Run demand variance analysis for the week
+     • Check for signs of accumulation due to retailer over-ordering
+
+   🏗 Production Team:
+     • Continue current production plan
+     • Build small buffer (5-10%) for festive/monsoon variability
+
+   🚚 Logistics Team:
+     • Standard monitoring — no major disruptions expected
+     • Pre-plan monsoon contingencies
+
+6. Final Decision:
+   Stable operations. Use this period to optimise inventory and renegotiate contracts.
+
+==================================================
