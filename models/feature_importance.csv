@@ -1,27 +1,98 @@
 Feature,Importance,Importance_Pct,Rank
-Bullwhip_Ratio,0.25873230678479026,25.87,1
-Supply_Disruption,0.19093803786035835,19.09,2
-Commodity_Price_INR,0.10503171953097906,10.5,3
-Price_7d_Mean,0.0565967940589224,5.66,4
-Lead_Time_Days,0.04689133239371219,4.69,5
-Day_of_Year,0.03790584018033952,3.79,6
-Wind_Speed_kmh,0.036550470921940796,3.66,7
-Demand_7d_Mean,0.03180745427207499,3.18,8
-Season,0.02777958368861312,2.78,9
-Is_Monsoon,0.027465430828569917,2.75,10
-Disruption_7d,0.02152724274415811,2.15,11
-Month,0.01884767079471791,1.88,12
-Consumer_Demand,0.017539655561833,1.75,13
-Retailer_Order,0.01486228449835611,1.49,14
-Rainfall_mm,0.013405310773073116,1.34,15
-Wholesaler_Order,0.011356139841019164,1.14,16
-Demand_7d_Std,0.011095511949104091,1.11,17
-Temperature_C,0.010931449260358179,1.09,18
-Manufacturer_Order,0.010546467631236714,1.05,19
-Inventory_Level,0.010481201150856462,1.05,20
-News_Sentiment,0.010186172037799654,1.02,21
-Price_Change_Pct,0.008877083706971973,0.89,22
-LeadTime_7d_Max,0.008409465341261486,0.84,23
-Demand_Amplification,0.007304299059160595,0.73,24
-Product_Code,0.003299007452609052,0.33,25
-Is_Festival,0.0016320676771839561,0.16,26
+Supply_Disruption_Rate,0.17936002549735372,17.94,1
+Supply_Disruption,0.15833003523032896,15.83,2
+Bullwhip_Ratio,0.15576964844933824,15.58,3
+Bullwhip_7d_Mean,0.09961802218343278,9.96,4
+Product_Price,0.040647651182101216,4.06,5
+Price_Stress,0.0392482588996265,3.92,6
+Disruption_Rate_7d,0.01879660531928571,1.88,7
+Day_of_Year,0.017142871761512697,1.71,8
+Demand_7d_Std,0.016607896382380388,1.66,9
+Disruption_7d,0.0149453059071188,1.49,10
+Price_Change_Pct,0.014112973332974987,1.41,11
+Manufacturer_Order_7d_Std,0.012855093599807028,1.29,12
+Inventory_7d_Std,0.01225832616473618,1.23,13
+Month,0.012058757881296189,1.21,14
+Price_7d_Mean,0.011843463218643643,1.18,15
+Bullwhip_7d_Std,0.011689980748645511,1.17,16
+Order_Total,0.01063204291617094,1.06,17
+Inventory_Level,0.010009731302228994,1.0,18
+Manufacturer_Order,0.009823934554686137,0.98,19
+Demand_7d_Mean,0.009724622678372277,0.97,20
+LeadTime_7d_Mean,0.009632016695771867,0.96,21
+Demand_Amplification,0.009588595345584998,0.96,22
+Manufacturer_Amplification,0.009569275763771458,0.96,23
+Sales,0.009539227894923818,0.95,24
+Retailer_Order,0.009322984229740138,0.93,25
+Inventory_7d_Mean,0.009225697685035542,0.92,26
+Season,0.008797136328959013,0.88,27
+Wholesaler_Order,0.008653519210168804,0.87,28
+Discount_Rate,0.008559493886929182,0.86,29
+LeadTime_7d_Max,0.0077730693576764254,0.78,30
+Lead_Time_Days,0.007713780370796557,0.77,31
+Wholesale_Amplification,0.00737977924843567,0.74,32
+Consumer_Demand,0.006876640462767242,0.69,33
+Is_Festival,0.004996616804894075,0.5,34
+Is_Monsoon,0.003260651216925803,0.33,35
+Customer_Segment_Consumer,0.0022309777575415693,0.22,36
+Year,0.002053749929369224,0.21,37
+Customer_Segment_Corporate,0.0012665126753206553,0.13,38
+Product_Category_Fishing,0.0011695752238538115,0.12,39
+Market_Pacific Asia,0.0010852950448196578,0.11,40
+Order_Region_Central America,0.0010759388585128691,0.11,41
+Market_Europe,0.0010271265628547179,0.1,42
+Product_Category_Cleats,0.0009896546926219559,0.1,43
+Product_Category_Camping & Hiking,0.0009788219788338956,0.1,44
+Order_Region_Western Europe,0.0008522589949698308,0.09,45
+Market_LATAM,0.0008357673654560532,0.08,46
+Order_Region_Eastern Asia,0.000726691741000897,0.07,47
+Product_Category_Indoor/Outdoor Games,0.0007184792874978235,0.07,48
+Product_Category_Cardio Equipment,0.0006901847562737355,0.07,49
+Product_Category_Men's Footwear,0.0006833997935157332,0.07,50
+Shipping_Mode_Standard Class,0.0006611993847966313,0.07,51
+Shipping_Mode_First Class,0.0006356045131996268,0.06,52
+Product_Category_Women's Apparel,0.0005983231330369514,0.06,53
+Order_Region_Caribbean,0.0005248465877097513,0.05,54
+Order_Region_Oceania,0.0004908181133493534,0.05,55
+Market_Africa,0.00048516663700622493,0.05,56
+Shipping_Mode_Second Class,0.0004795279406354458,0.05,57
+Order_Region_South America,0.00041919799789203995,0.04,58
+Product_Category_Water Sports,0.0004072580061587523,0.04,59
+Customer_Segment_Home Office,0.00039385921297022277,0.04,60
+Market_USCA,0.0003791252696633694,0.04,61
+Order_Region_Southern Europe,0.0003166876101852674,0.03,62
+Order_Region_East of USA,0.0003068359387961857,0.03,63
+Order_Region_Northern Europe,0.00030677382249964466,0.03,64
+Product_Category_Shop By Sport,0.00020641229948925192,0.02,65
+Order_Region_Southeast Asia,0.00015427709967675378,0.02,66
+Order_Region_West Asia,0.00010072510099199776,0.01,67
+Order_Region_Canada,9.561399351479549e-05,0.01,68
+Order_Region_Eastern Europe,9.190986160954999e-05,0.01,69
+Order_Region_West of USA ,9.153551198472435e-05,0.01,70
+Order_Region_South of  USA ,4.815894410273284e-05,0.0,71
+Order_Region_East Africa,3.0280967298951503e-05,0.0,72
+Order_Region_South Asia,2.769567856798505e-05,0.0,73
+Shipping_Mode_Same Day,0.0,0.0,74
+Product_Category_Trade-In,0.0,0.0,75
+Product_Category_Baseball & Softball,0.0,0.0,76
+Product_Category_Cameras ,0.0,0.0,77
+Product_Category_CDs ,0.0,0.0,78
+Product_Category_Children's Clothing,0.0,0.0,79
+Product_Category_Computers,0.0,0.0,80
+Product_Category_Crafts,0.0,0.0,81
+Product_Category_Accessories,0.0,0.0,82
+Product_Category_Baby ,0.0,0.0,83
+Product_Category_Tennis & Racquet,0.0,0.0,84
+Product_Category_DVDs,0.0,0.0,85
+Product_Category_Golf Balls,0.0,0.0,86
+Product_Category_Electronics,0.0,0.0,87
+Product_Category_Hockey,0.0,0.0,88
+Product_Category_Golf Gloves,0.0,0.0,89
+Product_Category_Boxing & MMA,0.0,0.0,90
+Product_Category_Books ,0.0,0.0,91
+Order_Region_Central Africa,0.0,0.0,92
+Order_Region_Central Asia,0.0,0.0,93
+Order_Region_North Africa,0.0,0.0,94
+Order_Region_Southern Africa,0.0,0.0,95
+Order_Region_US Center ,0.0,0.0,96
+Order_Region_West Africa,0.0,0.0,97

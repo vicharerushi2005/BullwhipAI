@@ -1,15 +1,15 @@
-Generated: 2026-08-01 16:22:12
+Generated: 2026-08-16 15:10:20
 
 
 ========== AI SUPPLY CHAIN REPORT (Rule-Based) ==========
-Generated: 2026-08-01 16:22:12
+Generated: 2026-08-16 15:10:20
 (Ollama offline — using rule-based report)
 
 ===== SUPPLY CHAIN ALERT =====
 
 1. Overall Risk Level:
    Rule-Based : LOW (Score: 25.0)
-   ML Model   : MEDIUM (80.5% confidence)
+   ML Model   : MEDIUM (80.7% confidence)
 
 2. Bullwhip Effect Analysis:
    Mild Bullwhip Effect detected. Ratio of 1.66 indicates some order inflation upstream. Early intervention can prevent escalation to HIGH risk. Monitor demand signals closely and avoid reactive over-ordering.

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-01 16:22:08",
+  "generated_at": "2026-08-16 15:10:15",
   "prediction": {
     "risk_label": "MEDIUM",
     "risk_emoji": "\ud83d\udfe1 MEDIUM",
-    "confidence_pct": 80.5,
+    "confidence_pct": 80.7,
     "confidence_breakdown": {
-      "LOW": 2.3,
-      "MEDIUM": 80.5,
-      "HIGH": 17.1
+      "LOW": 2.8,
+      "MEDIUM": 80.7,
+      "HIGH": 16.5
     }
   },
   "top_drivers": [
@@ -15,43 +15,43 @@
       "feature": "Demand_7d_Mean",
       "description": "7-day average consumer demand",
       "value": 981.68,
-      "local_impact": 16.89,
+      "local_impact": 19.55,
       "assessment": "Value: 981.68"
-    },
-    {
-      "feature": "Temperature_C",
-      "description": "Temperature (\u00b0C)",
-      "value": 27.2,
-      "local_impact": 16.46,
-      "assessment": "\ud83d\udfe2 27.2\u00b0C \u2014 comfortable temperature range"
     },
     {
       "feature": "Day_of_Year",
       "description": "Day of the year (seasonality indicator)",
-      "value": 213,
-      "local_impact": 9.89,
-      "assessment": "Value: 213"
+      "value": 228,
+      "local_impact": 17.34,
+      "assessment": "Value: 228"
+    },
+    {
+      "feature": "Consumer_Demand",
+      "description": "Consumer-level demand",
+      "value": 900.0,
+      "local_impact": 7.85,
+      "assessment": "Value: 900.0"
+    },
+    {
+      "feature": "Wind_Speed_kmh",
+      "description": "Wind speed (km/h)",
+      "value": 17.4,
+      "local_impact": 7.84,
+      "assessment": "Value: 17.4"
     },
     {
       "feature": "Wholesaler_Order",
       "description": "Wholesaler order quantity",
       "value": 3240.0,
-      "local_impact": 9.68,
+      "local_impact": 7.06,
       "assessment": "Value: 3240.0"
     },
     {
-      "feature": "Manufacturer_Order",
-      "description": "Manufacturer order quantity",
-      "value": 8100.0,
-      "local_impact": 9.1,
-      "assessment": "Value: 8100.0"
-    },
-    {
-      "feature": "Wind_Speed_kmh",
-      "description": "Wind speed (km/h)",
-      "value": 16.2,
-      "local_impact": 8.24,
-      "assessment": "Value: 16.2"
+      "feature": "Temperature_C",
+      "description": "Temperature (\u00b0C)",
+      "value": 28.4,
+      "local_impact": 7.05,
+      "assessment": "\ud83d\udfe2 28.4\u00b0C \u2014 comfortable temperature range"
     }
   ],
   "bullwhip_narrative": "Mild Bullwhip Effect detected. Ratio of 1.66 indicates some order inflation upstream. Early intervention can prevent escalation to HIGH risk. Monitor demand signals closely and avoid reactive over-ordering.",

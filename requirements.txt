@@ -23,3 +23,6 @@ ollama>=0.1.0
 
 # Utilities
 python-dateutil>=2.8.0
+
+
+sdv==1.38.0

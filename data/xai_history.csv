@@ -5,3 +5,4 @@ Timestamp,Risk_Label,Confidence_Pct,Top_Driver,Bullwhip_Ratio,Supply_Disruption,
 2026-08-01 10:18:26,MEDIUM,83.7,Retailer_Order,1.6601,0,4200.0
 2026-08-01 16:08:15,MEDIUM,79.6,Demand_7d_Mean,1.6601,0,45.0
 2026-08-01 16:22:08,MEDIUM,80.5,Demand_7d_Mean,1.6601,0,45.0
+2026-08-16 15:10:15,MEDIUM,80.7,Demand_7d_Mean,1.6601,0,45.0
