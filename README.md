@@ -158,5 +158,3 @@ Bullwhip Ratio = Variance(Manufacturer Orders) / Variance(Consumer Demand)
 - Ratio > 2.5 → High risk, severe bullwhip effect active
 
 ---
-
-*BullwhipAI — Final Year Engineering Project | Free & Open Source*
